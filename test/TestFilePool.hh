@@ -6,8 +6,6 @@
 # include <QDir>
 # include <QDebug>
 
-# include "../FilePool.hh"
-
 class TestFilePool : public QObject
 {
     Q_OBJECT

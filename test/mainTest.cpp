@@ -1,4 +1,14 @@
 # include <QtTest/QTest>
 # include "TestFilePool.hh"
+# include "TestZippedBuffer.hh"
 
-QTEST_MAIN(TestFilePool)
+int main()
+{
+  TestFilePool filepool;
+  TestZippedBuffer zippedbuffer;
+
+  QTest::qExec(&filepool);
+  QTest::qExec(&zippedbuffer);
+
+  return 0;
+}

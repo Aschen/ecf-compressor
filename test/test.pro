@@ -8,6 +8,9 @@ TEMPLATE = app
 TARGET = test
 INCLUDEPATH += .
 
+QMAKE_CXX = clang++
+QMAKE_CC = clang
+
 # Input
-HEADERS += TestFilePool.hh ../FilePool.hh
-SOURCES += mainTest.cpp TestFilePool.cpp ../FilePool.cpp
+HEADERS += TestFilePool.hh ../FilePool.hh TestZippedBuffer.hh ../ZippedBuffer.hh
+SOURCES += mainTest.cpp TestFilePool.cpp ../FilePool.cpp TestZippedBuffer.cpp ../ZippedBuffer.cpp

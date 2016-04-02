@@ -1,5 +1,8 @@
 #include "TestFilePool.hh"
 
+#include "../FilePool.hh"
+
+
 TestFilePool::TestFilePool()
 {
 
@@ -44,7 +47,7 @@ void TestFilePool::fillPool()
 {
     FilePool    filepool("folder_1/", "c");
 
-    QVERIFY(filepool.count() == 6);
+    QVERIFY2(filepool.count() == 6, "Wrong number of files in filepool");
 }
 
 void TestFilePool::tryGetFile()
@@ -54,8 +57,8 @@ void TestFilePool::tryGetFile()
 
     filepool.tryGetFile();
 
-    QVERIFY(filepool.count() == 1);
-    QVERIFY(emptyFilepool.tryGetFile() == "");
+    QVERIFY2(filepool.count() == 1, "File not removed from filepool");
+    QVERIFY2(emptyFilepool.tryGetFile() == "", "Empty filepool don't return \"\"");
 }
 
 void TestFilePool::cleanupTestCase()
