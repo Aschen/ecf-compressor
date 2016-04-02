@@ -7,8 +7,6 @@ ZippedBuffer::ZippedBuffer()
 void ZippedBuffer::read(QDataStream &stream)
 {
     stream >> m_filepath >> m_data;
-
-    qDebug() << "filepath" << m_filepath << " data" << m_data.toHex();
 }
 
 void ZippedBuffer::write(QDataStream &stream) const
