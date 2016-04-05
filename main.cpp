@@ -1,20 +1,14 @@
 #include <QCoreApplication>
-# include "ZippedBuffer.hh"
+
+#include "EpsiFileCompressor.hh"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    ZippedBuffer    zippedBuffer;
-    QByteArray      formatedData;
-    QDataStream     stream(&formatedData, QIODevice::ReadWrite);
-    QString         filepath("test_dir/file.c");
-    QByteArray      data;
-    data.append("I'm the data bitch");
-    stream << filepath << data;
+    EpsiFileCompressor  fileCompressor;
 
-    stream >> zippedBuffer;
-
-    qDebug() << zippedBuffer.filepath () << zippedBuffer.data ();
+    fileCompressor.compress("test/", "compressed.ecf");
 
     return a.exec();
 }

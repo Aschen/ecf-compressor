@@ -10,10 +10,12 @@ Writter::Writter(const QString &ecfFilename)
     init();
 }
 
-Writter::Writter(const QString& ecfFilename, ZippedBufferPool* zippedBufferPool)
+Writter::Writter(const QString& ecfFilename, ZippedBufferPool* zippedBufferPool,
+                 QWaitCondition *waitCondition)
     : m_ecfFilename(ecfFilename),
       m_zippedBufferPool(zippedBufferPool),
-      m_file(m_ecfFilename)
+      m_file(m_ecfFilename),
+      m_waitCondition(waitCondition)
 {
     init();
 }
@@ -34,11 +36,14 @@ Writter::~Writter()
 
 void Writter::run()
 {
+    m_waitCondition->wait(&m_mutex);
+
     ZippedBuffer    zippedBuffer = m_zippedBufferPool->tryGet();
 
     while (zippedBuffer.valid())
     {
         m_stream << zippedBuffer;
+        m_waitCondition->wait(&m_mutex);
         zippedBuffer = m_zippedBufferPool->tryGet();
     }
 }

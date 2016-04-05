@@ -9,7 +9,7 @@ TestZippedBufferPool::TestZippedBufferPool()
 
 void TestZippedBufferPool::put()
 {
-    ZippedBufferPool    pool;
+    ZippedBufferPool    pool(nullptr);
 
     pool.put(ZippedBuffer());
     pool.put(ZippedBuffer());
@@ -20,7 +20,7 @@ void TestZippedBufferPool::put()
 
 void TestZippedBufferPool::tryGet()
 {
-    ZippedBufferPool    pool;
+    ZippedBufferPool    pool(nullptr);
 
     pool.put(ZippedBuffer("Buf1", QByteArray()));
     pool.put(ZippedBuffer("Buf2", QByteArray()));

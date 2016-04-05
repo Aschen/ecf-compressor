@@ -28,7 +28,8 @@ SOURCES += main.cpp \
     test/TestZippedBufferPool.cpp \
     test/TestZipper.cpp \
     Writter.cpp \
-    test/TestWritter.cpp
+    test/TestWritter.cpp \
+    EpsiFileCompressor.cpp
 
 HEADERS += \
     FilePool.hh \
@@ -40,5 +41,6 @@ HEADERS += \
     test/TestZippedBufferPool.hh \
     test/TestZipper.hh \
     Writter.hh \
-    test/TestWritter.hh
+    test/TestWritter.hh \
+    EpsiFileCompressor.hh
 

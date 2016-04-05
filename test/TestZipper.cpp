@@ -41,7 +41,7 @@ void TestZipper::initTestCase()
 void TestZipper::run()
 {
     FilePool            filepool("folder_1/");
-    ZippedBufferPool    zippedBufferPool;
+    ZippedBufferPool    zippedBufferPool(nullptr);
     Zipper              zipper(&filepool, &zippedBufferPool);
 
     zipper.start();

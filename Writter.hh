@@ -19,11 +19,12 @@ private:
     QFile                   m_file;
     QDataStream             m_stream;
     QMutex                  m_mutex;
-    QWaitCondition          m_waitCondition;
+    QWaitCondition*         m_waitCondition;
 
 public:
     Writter(const QString& ecfFilename);
-    Writter(const QString& ecfFilename, ZippedBufferPool* zippedBufferPool);
+    Writter(const QString& ecfFilename, ZippedBufferPool* zippedBufferPool,
+            QWaitCondition* waitCondition);
     ~Writter();
 
     // Public method so I can test it
