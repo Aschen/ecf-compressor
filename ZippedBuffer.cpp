@@ -1,24 +1,21 @@
 #include "ZippedBuffer.hh"
 
 ZippedBuffer::ZippedBuffer()
-{
-
-}
-
-ZippedBuffer::ZippedBuffer(const QString &filepath)
-    : m_filepath(filepath)
+    : m_valid(false)
 {
 }
 
 ZippedBuffer::ZippedBuffer(const QString &filepath, const QByteArray &data)
     : m_filepath(filepath),
-      m_data(data)
+      m_data(data),
+      m_valid(true)
 {
 }
 
 void ZippedBuffer::read(QDataStream &stream)
 {
     stream >> m_filepath >> m_data;
+    m_valid = true;
 }
 
 void ZippedBuffer::write(QDataStream &stream) const
@@ -46,6 +43,16 @@ void ZippedBuffer::data(const QByteArray &data)
     m_data = data;
 }
 
+bool ZippedBuffer::valid() const
+{
+    return m_valid;
+}
+
+void ZippedBuffer::valid(bool isValid)
+{
+    m_valid = isValid;
+}
+
 QDataStream &operator <<(QDataStream &out, const ZippedBuffer &zippedBuffer)
 {
     out << zippedBuffer.filepath() << zippedBuffer.data();
@@ -62,6 +69,7 @@ QDataStream &operator >>(QDataStream &in, ZippedBuffer &zippedBuffer)
 
     zippedBuffer.filepath(filepath);
     zippedBuffer.data(data);
+    zippedBuffer.valid(true);
 
     return in;
 }

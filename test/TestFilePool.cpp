@@ -38,6 +38,7 @@ void TestFilePool::initTestCase()
             QTextStream stream(&file);
 
             stream << filename << filename << filename;
+            file.close();
         }
     }
 }

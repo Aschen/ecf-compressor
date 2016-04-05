@@ -11,10 +11,10 @@ class ZippedBuffer
 private:
     QString             m_filepath;
     QByteArray          m_data;
+    bool                m_valid;
 
 public:
     ZippedBuffer();
-    ZippedBuffer(const QString &filepath);
     ZippedBuffer(const QString &filepath, const QByteArray &data);
 
     void                read(QDataStream &stream);
@@ -24,6 +24,8 @@ public:
     void                filepath(const QString &filepath);
     const QByteArray    data() const;
     void                data(const QByteArray &data);
+    bool                valid() const;
+    void                valid(bool isValid);
 
 };
 

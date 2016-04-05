@@ -17,7 +17,7 @@ public:
     ZippedBufferPool();
 
     void                        put(const ZippedBuffer &zippedBuffer);
-    QPair<bool, ZippedBuffer>   tryGet();
+    ZippedBuffer                tryGet();
     void                        done();
 
     quint32                     count();

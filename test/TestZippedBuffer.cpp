@@ -21,6 +21,7 @@ void TestZippedBuffer::read()
 
     zippedBuffer.read(stream2);
 
+    QVERIFY2(zippedBuffer.valid() == true, "ZippedBuffer should be valid");
     QVERIFY2(zippedBuffer.filepath() == filepath, "Error when reading filepath from stream");
     QVERIFY2(zippedBuffer.data() == data, "Error when reading data from stream");
 }
@@ -38,9 +39,9 @@ void TestZippedBuffer::rightChevron()
 
     stream2 >> zippedBuffer;
 
+    QVERIFY2(zippedBuffer.valid() == true, "ZippedBuffer should be valid");
     QVERIFY2(zippedBuffer.filepath() == filepath, "Error when reading filepath from stream");
     QVERIFY2(zippedBuffer.data() == data, "Error when reading data from stream");
-
 }
 
 void TestZippedBuffer::write()
@@ -85,6 +86,5 @@ void TestZippedBuffer::leftChevron()
 
     QVERIFY2(dataIn == dataOut, "Error when writting data to QDataStream");
     QVERIFY2(filepathIn == filepathOut, "Error when writting filepath to QDataStream");
-
 }
 

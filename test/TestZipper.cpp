@@ -33,6 +33,7 @@ void TestZipper::initTestCase()
             QTextStream stream(&file);
 
             stream << filename << filename << filename;
+            file.close();
         }
     }
 }
@@ -53,7 +54,7 @@ void TestZipper::run()
 void TestZipper::createZippedBuffer()
 {
     ZippedBuffer    zippedBuffer;
-    Zipper          zipper;
+    Zipper          zipper(nullptr, nullptr);
     QString         filepath = m_files.front();
     QFile           file(filepath);
     bool            ret;

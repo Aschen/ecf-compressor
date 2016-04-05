@@ -4,10 +4,6 @@
 #include "ZippedBuffer.hh"
 #include "ZippedBufferPool.hh"
 
-Zipper::Zipper()
-{
-}
-
 Zipper::Zipper(FilePool* filepool, ZippedBufferPool* zippedBufferPool)
     : m_filePool(filepool),
       m_zippedBufferPool(zippedBufferPool)
@@ -36,14 +32,17 @@ bool Zipper::createZippedBuffer(const QString &filepath, ZippedBuffer &zippedBuf
     QByteArray      compressedData;
     QFile           file(filepath);
 
+    // Assert this ?
     if ( ! file.open(QIODevice::ReadOnly))
         return false;
 
     compressedData = qCompress(file.readAll());
-    streamIn << filepath << compressedData;
+    file.close();
 
+    streamIn << filepath << compressedData;
     QDataStream     streamOut(formatedData);
     streamOut >> zippedBuffer;
+
 
     return true;
 }

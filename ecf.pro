@@ -26,7 +26,9 @@ SOURCES += main.cpp \
     test/TestFilePool.cpp \
     test/TestZippedBuffer.cpp \
     test/TestZippedBufferPool.cpp \
-    test/TestZipper.cpp
+    test/TestZipper.cpp \
+    Writter.cpp \
+    test/TestWritter.cpp
 
 HEADERS += \
     FilePool.hh \
@@ -36,5 +38,7 @@ HEADERS += \
     test/TestFilePool.hh \
     test/TestZippedBuffer.hh \
     test/TestZippedBufferPool.hh \
-    test/TestZipper.hh
+    test/TestZipper.hh \
+    Writter.hh \
+    test/TestWritter.hh
 

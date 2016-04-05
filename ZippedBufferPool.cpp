@@ -13,15 +13,14 @@ void ZippedBufferPool::put(const ZippedBuffer &zippedBuffer)
     m_zippedBuffers.push_back(zippedBuffer);
 }
 
-QPair<bool, ZippedBuffer> ZippedBufferPool::tryGet()
+ZippedBuffer ZippedBufferPool::tryGet()
 {
     QMutexLocker    locker(&m_mutex);
-    QPair<bool, ZippedBuffer>   zippedBuffer(false, ZippedBuffer());
+    ZippedBuffer    zippedBuffer;
 
     if ( ! m_zippedBuffers.empty())
     {
-        zippedBuffer.first = true;
-        zippedBuffer.second = m_zippedBuffers.front();
+        zippedBuffer = m_zippedBuffers.front();
         m_zippedBuffers.pop_front();
     }
 

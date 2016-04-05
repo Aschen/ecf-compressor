@@ -22,13 +22,13 @@ void TestZippedBufferPool::tryGet()
 {
     ZippedBufferPool    pool;
 
-    pool.put(ZippedBuffer("Buf1"));
-    pool.put(ZippedBuffer("Buf2"));
-    QPair<bool, ZippedBuffer>   pair = pool.tryGet();
+    pool.put(ZippedBuffer("Buf1", QByteArray()));
+    pool.put(ZippedBuffer("Buf2", QByteArray()));
+    ZippedBuffer    zippedBuffer = pool.tryGet();
     pool.tryGet();
 
-    QVERIFY2(pair.first == true, "ZipperBuffer should be valid");
-    QVERIFY2(pair.second.filepath() == "Buf1", "Error in ZippedBuffer order in pool");
-    QVERIFY2(pool.tryGet().first == false, "ZippedBuffer should be false");
+    QVERIFY2(zippedBuffer.valid() == true, "ZipperBuffer should be valid");
+    QVERIFY2(zippedBuffer.filepath() == "Buf1", "Error in ZippedBuffer order in pool");
+    QVERIFY2(pool.tryGet().valid() == false, "ZippedBuffer should be false");
 }
 

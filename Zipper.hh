@@ -16,7 +16,6 @@ private:
     ZippedBufferPool*    m_zippedBufferPool;
 
 public:
-    Zipper();
     Zipper(FilePool *filepool, ZippedBufferPool *zippedBufferPool);
 
     // Public method so i can test it..
