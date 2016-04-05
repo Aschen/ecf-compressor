@@ -46,7 +46,7 @@ void FilePool::fillPool(const QString &folder)
         }
         else if (entry.isFile())
         {
-            m_files.append(entry.absoluteFilePath());
+            m_files.append(entry.filePath());
         }
     }
 }

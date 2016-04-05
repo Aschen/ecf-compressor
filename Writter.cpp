@@ -42,6 +42,7 @@ void Writter::run()
 
     while (zippedBuffer.valid())
     {
+        qDebug() << "Write compressed file";
         m_stream << zippedBuffer;
         m_waitCondition->wait(&m_mutex);
         zippedBuffer = m_zippedBufferPool->tryGet();
