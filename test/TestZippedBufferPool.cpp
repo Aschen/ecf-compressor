@@ -29,6 +29,6 @@ void TestZippedBufferPool::tryGet()
 
     QVERIFY2(pair.first == true, "ZipperBuffer should be valid");
     QVERIFY2(pair.second.filepath() == "Buf1", "Error in ZippedBuffer order in pool");
-    QVERIFY2(pool.tryGet ().first == false, "ZippedBuffer should be false");
+    QVERIFY2(pool.tryGet().first == false, "ZippedBuffer should be false");
 }
 

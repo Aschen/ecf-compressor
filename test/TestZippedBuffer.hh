@@ -13,7 +13,9 @@ public:
 
 private slots:
     void        read();
+    void        rightChevron();
     void        write();
+    void        leftChevron();
 };
 
 #endif // TESTZIPPEDBUFFER_HH

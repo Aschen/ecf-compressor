@@ -14,7 +14,6 @@ private:
     QStringList         m_directories;
     QStringList         m_files;
 
-
 public:
     TestFilePool();
 
