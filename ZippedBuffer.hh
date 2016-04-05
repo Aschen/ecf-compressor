@@ -14,6 +14,8 @@ private:
 
 public:
     ZippedBuffer();
+    ZippedBuffer(const QString &filepath);
+    ZippedBuffer(const QString &filepath, const QByteArray &data);
 
     void                read(QDataStream &stream);
     void                write(QDataStream &stream) const;

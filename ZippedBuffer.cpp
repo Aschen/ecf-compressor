@@ -2,6 +2,18 @@
 
 ZippedBuffer::ZippedBuffer()
 {
+
+}
+
+ZippedBuffer::ZippedBuffer(const QString &filepath)
+    : m_filepath(filepath)
+{
+}
+
+ZippedBuffer::ZippedBuffer(const QString &filepath, const QByteArray &data)
+    : m_filepath(filepath),
+      m_data(data)
+{
 }
 
 void ZippedBuffer::read(QDataStream &stream)
@@ -33,7 +45,6 @@ void ZippedBuffer::data(const QByteArray &data)
 {
     m_data = data;
 }
-
 
 QDataStream &operator <<(QDataStream &out, const ZippedBuffer &zippedBuffer)
 {

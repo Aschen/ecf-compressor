@@ -20,13 +20,19 @@ unix:OBJECTS_DIR = ../tmp
 
 SOURCES += main.cpp \
     FilePool.cpp \
-    test/TestFilePool.cpp \
     ZippedBuffer.cpp \
-    test/TestZippedBuffer.cpp
+    Zipper.cpp \
+    ZippedBufferPool.cpp \
+    test/TestFilePool.cpp \
+    test/TestZippedBuffer.cpp \
+    test/TestZippedBufferPool.cpp \
 
 HEADERS += \
     FilePool.hh \
-    test/TestFilePool.hh \
     ZippedBuffer.hh \
-    test/TestZippedBuffer.hh
+    Zipper.hh \
+    ZippedBufferPool.hh \
+    test/TestFilePool.hh \
+    test/TestZippedBuffer.hh \
+    test/TestZippedBufferPool.hh \
 

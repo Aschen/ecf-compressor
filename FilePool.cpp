@@ -1,8 +1,7 @@
 #include "FilePool.hh"
 
-FilePool::FilePool(const QString &folder, const QString &extension)
-    : m_folder(folder),
-      m_extension(extension)
+FilePool::FilePool(const QString &folder)
+    : m_folder(folder)
 {
     fillPool(m_folder);
 }
@@ -45,7 +44,7 @@ void FilePool::fillPool(const QString &folder)
         {
             fillPool(entry.filePath());
         }
-        else if (entry.isFile() && entry.suffix() == m_extension)
+        else if (entry.isFile())
         {
             m_files.append(entry.absoluteFilePath());
         }

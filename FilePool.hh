@@ -9,12 +9,11 @@ class FilePool
 {
 private:
     const QString       m_folder;
-    const QString       m_extension;
     QStringList         m_files;
     QMutex              m_mutex;
 
 public:
-    FilePool(const QString &folder, const QString &extension);
+    FilePool(const QString &folder);
 
     quint32             count();
     const QStringList   &files() const;

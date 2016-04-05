@@ -11,6 +11,7 @@ TestFilePool::TestFilePool()
 void TestFilePool::initTestCase()
 {
     m_directories.append("folder_1");
+    m_directories.append("folder_2");
     m_directories.append("folder_1/folder_1_1");
 
     // Create directories
@@ -23,12 +24,10 @@ void TestFilePool::initTestCase()
     m_files.append("folder_1/file1.c");
     m_files.append("folder_1/file2.c");
     m_files.append("folder_1/file3.c");
-    m_files.append("folder_1/file4.h");
 
     m_files.append("folder_1/folder_1_1/file11.c");
     m_files.append("folder_1/folder_1_1/file12.c");
     m_files.append("folder_1/folder_1_1/file13.c");
-    m_files.append("folder_1/folder_1_1/file14.h");
 
     for (const QString &filename : m_files)
     {
@@ -45,19 +44,19 @@ void TestFilePool::initTestCase()
 
 void TestFilePool::fillPool()
 {
-    FilePool    filepool("folder_1/", "c");
+    FilePool    filepool("folder_1/");
 
     QVERIFY2(filepool.count() == 6, "Wrong number of files in filepool");
 }
 
 void TestFilePool::tryGetFile()
 {
-    FilePool    filepool("folder_1/", "h");
-    FilePool    emptyFilepool("folder_1/", "o");
+    FilePool    filepool("folder_1/");
+    FilePool    emptyFilepool("folder_2/");
 
     filepool.tryGetFile();
 
-    QVERIFY2(filepool.count() == 1, "File not removed from filepool");
+    QVERIFY2(filepool.count() == 5, "File not removed from filepool");
     QVERIFY2(emptyFilepool.tryGetFile() == "", "Empty filepool don't return \"\"");
 }
 
