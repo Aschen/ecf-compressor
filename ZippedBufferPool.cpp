@@ -13,7 +13,8 @@ void ZippedBufferPool::put(const ZippedBuffer &zippedBuffer)
 
     m_zippedBuffers.push_back(zippedBuffer);
 
-    m_waitCondition->wakeOne();
+    if (m_waitCondition)
+        m_waitCondition->wakeOne();
 }
 
 ZippedBuffer ZippedBufferPool::tryGet()
