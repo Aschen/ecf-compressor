@@ -18,7 +18,7 @@ private:
 public:
     Zipper(FilePool *filepool, ZippedBufferPool *zippedBufferPool);
 
-    // Public method so i can test it..
+    // Public method so i can test it
     bool                createZippedBuffer(const QString& filepath,
                                            ZippedBuffer& zippedBuffer) const;
 

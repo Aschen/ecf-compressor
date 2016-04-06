@@ -1,0 +1,17 @@
+# Epsi File Compressor
+
+## Usage
+
+ - ```git clone https://github.com/Aschen/ecf-compressor/```
+ - ```cd ecf-compressor```
+ - ```make```
+ - ```./ecf```
+
+## Run tests
+
+ - ```cd test```
+ - ```make```
+ - ```./test```
+
+(Sometime the test is blocked and I have to sigkill the program and restart it..)
+
