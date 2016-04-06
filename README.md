@@ -7,6 +7,12 @@
  - ```make```
  - ```./ecf```
 
+Then you can verify files integrity :
+
+ - ```cd tmp_dest```
+ - ```make```
+ - ```./ecf```
+
 ## Run tests
 
  - ```cd test```
