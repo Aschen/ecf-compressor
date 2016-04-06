@@ -3,19 +3,22 @@
 #include "ZippedBuffer.hh"
 
 ZippedBufferPool::ZippedBufferPool(QWaitCondition *waitCondition)
-    : m_waitCondition(waitCondition)
+    : m_waitCondition(waitCondition),
+      m_started(false)
 {
 }
 
 void ZippedBufferPool::put(const ZippedBuffer &zippedBuffer)
 {
     QMutexLocker    locker(&m_mutex);
-    quint32         count = m_zippedBuffers.count();
 
     m_zippedBuffers.push_back(zippedBuffer);
 
-    if (m_waitCondition && count == 0)
+    if (m_waitCondition && ! m_started)
+    {
         m_waitCondition->wakeOne();
+        m_started = true;
+    }
 }
 
 ZippedBuffer ZippedBufferPool::tryGet()

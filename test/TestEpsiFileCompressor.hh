@@ -20,8 +20,7 @@ public:
 private slots:
     void    initTestCase();
 
-    void    compress();
-    void    uncompress();
+    void    compressAndUncompress();
 
     void    cleanupTestCase();
 };

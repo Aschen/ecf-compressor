@@ -37,18 +37,23 @@ void TestEpsiFileCompressor::initTestCase()
     }
 }
 
-void TestEpsiFileCompressor::compress()
+void TestEpsiFileCompressor::compressAndUncompress()
 {
     EpsiFileCompressor      compressor;
 
     compressor.compress(m_directories.front(), "folder_2/compressed.ecf");
-}
-
-void TestEpsiFileCompressor::uncompress()
-{
-    EpsiFileCompressor      compressor;
-
     compressor.uncompress("folder_2/compressed.ecf", "folder_3/");
+    QFile   file11("folder_1/file1.c");
+    QFile   file13("folder_1/file3.c");
+    QFile   file31("folder_3/file1.c");
+    QFile   file33("folder_3/file3.c");
+    file11.open (QIODevice::ReadOnly);
+    file13.open (QIODevice::ReadOnly);
+    file31.open (QIODevice::ReadOnly);
+    file33.open (QIODevice::ReadOnly);
+
+//    QVERIFY2(file11.readAll () == file31.readAll (), "File content of first files should match");
+//    QVERIFY2(file31.readAll () == file33.readAll (), "File content of last files should match");
 }
 
 void TestEpsiFileCompressor::cleanupTestCase()
