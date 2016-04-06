@@ -14,14 +14,16 @@ private:
     QQueue<ZippedBuffer>        m_zippedBuffers;
     QMutex                      m_mutex;
     QWaitCondition*             m_waitCondition;
+    bool                        m_done;
 
 public:
     ZippedBufferPool(QWaitCondition* waitCondition);
 
     void                        put(const ZippedBuffer &zippedBuffer);
     ZippedBuffer                tryGet();
-    void                        done();
 
+    void                        done(bool end);
+    bool                        done();
     quint32                     count();
 };
 

@@ -19,6 +19,7 @@ void Zipper::run()
     {
         if (createZippedBuffer(filepath, zippedBuffer))
         {
+            qDebug() << "Zip file" << filepath;
             m_zippedBufferPool->put(zippedBuffer);
         }
         filepath = m_filePool->tryGetFile();
@@ -42,7 +43,6 @@ bool Zipper::createZippedBuffer(const QString &filepath, ZippedBuffer &zippedBuf
     streamIn << filepath << compressedData;
     QDataStream     streamOut(formatedData);
     streamOut >> zippedBuffer;
-
 
     return true;
 }

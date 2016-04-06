@@ -16,7 +16,7 @@ public:
     EpsiFileCompressor();
 
     void                compress(const QString &folder, const QString &ecfFilename);
-    void                uncompress(const QString &ecfFilename, const QString &folder);
+    void                uncompress(const QString &ecfFilename, const QString &destFolder);
 };
 
 #endif // EPSIFILECOMPRESSOR_HH

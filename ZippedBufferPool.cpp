@@ -10,10 +10,11 @@ ZippedBufferPool::ZippedBufferPool(QWaitCondition *waitCondition)
 void ZippedBufferPool::put(const ZippedBuffer &zippedBuffer)
 {
     QMutexLocker    locker(&m_mutex);
+    quint32         count = m_zippedBuffers.count();
 
     m_zippedBuffers.push_back(zippedBuffer);
 
-    if (m_waitCondition)
+    if (m_waitCondition && count == 0)
         m_waitCondition->wakeOne();
 }
 
@@ -31,8 +32,19 @@ ZippedBuffer ZippedBufferPool::tryGet()
     return zippedBuffer;
 }
 
-void ZippedBufferPool::done()
+void ZippedBufferPool::done(bool end)
 {
+    QMutexLocker    locker(&m_mutex);
+
+    qDebug() << "Done";
+    m_done = end;
+}
+
+bool ZippedBufferPool::done()
+{
+    QMutexLocker    locker(&m_mutex);
+
+    return m_done;
 }
 
 quint32 ZippedBufferPool::count()
