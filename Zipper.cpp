@@ -19,7 +19,6 @@ void Zipper::run()
     {
         if (createZippedBuffer(filepath, zippedBuffer))
         {
-            qDebug() << "Zip file" << filepath;
             m_zippedBufferPool->put(zippedBuffer);
         }
         filepath = m_filePool->tryGetFile();

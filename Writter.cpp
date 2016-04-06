@@ -44,14 +44,11 @@ void Writter::run()
     {
         if (zippedBuffer.valid())
         {
-            qDebug() << "Write compressed file" << zippedBuffer.filepath();
             m_stream << zippedBuffer;
         }
 
         zippedBuffer = m_zippedBufferPool->tryGet();
     }
-
-    qDebug() << "Writter exit";
 }
 
 void Writter::writeZippedBuffer(ZippedBuffer& zippedBuffer)

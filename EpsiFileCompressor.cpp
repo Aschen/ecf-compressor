@@ -50,15 +50,14 @@ void EpsiFileCompressor::uncompress(const QString &ecfFilename, const QString &d
 
         QFileInfo       fileinfo(destFolder + currentDir.relativeFilePath(zippedBuffer.filepath()));
 
-        qDebug() << fileinfo.path();
         if ( ! QDir(fileinfo.path()).exists())
             QDir().mkpath(fileinfo.path());
 
         QFile           file(fileinfo.filePath());
         file.open(QIODevice::WriteOnly);
 
-        QDataStream     fileStream(&file);
-        fileStream << qUncompress(zippedBuffer.data());
+        file.write(qUncompress(zippedBuffer.data()));
+
         file.close();
     }
 }

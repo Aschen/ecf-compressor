@@ -36,7 +36,6 @@ void ZippedBufferPool::done(bool end)
 {
     QMutexLocker    locker(&m_mutex);
 
-    qDebug() << "Done";
     m_done = end;
 }
 
