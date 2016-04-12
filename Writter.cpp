@@ -49,6 +49,8 @@ void Writter::run()
 
         zippedBuffer = m_zippedBufferPool->tryGet();
     }
+
+    m_mutex.unlock();
 }
 
 void Writter::writeZippedBuffer(ZippedBuffer& zippedBuffer)
