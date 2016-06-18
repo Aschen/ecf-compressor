@@ -34,9 +34,11 @@ void EpsiFileCompressor::compress(const QString &folder, const QString &ecfFilen
 
 void EpsiFileCompressor::uncompress(const QString &ecfFilename, const QString &destFolder)
 {
-    QDir        currentDir(".");
-    QFile       ecfFile(ecfFilename);
-    QByteArray  compressedData;
+    QDir                currentDir(".");
+    QFile               ecfFile(ecfFilename);
+    QByteArray          compressedData;
+    QWaitCondition      waitCondition;
+    ZippedBufferPool    zippedBufferPool(&waitCondition);
 
     ecfFile.open(QIODevice::ReadOnly);
     compressedData = ecfFile.readAll();
@@ -47,18 +49,6 @@ void EpsiFileCompressor::uncompress(const QString &ecfFilename, const QString &d
     {
         ZippedBuffer    zippedBuffer;
         stream >> zippedBuffer;
-
-        QFileInfo       fileinfo(destFolder + currentDir.relativeFilePath(zippedBuffer.filepath()));
-
-        if ( ! QDir(fileinfo.path()).exists())
-            QDir().mkpath(fileinfo.path());
-
-        QFile           file(fileinfo.filePath());
-        file.open(QIODevice::WriteOnly);
-
-        file.write(qUncompress(zippedBuffer.data()));
-
-        file.close();
+        zippedBufferPool.put(zippedBuffer);
     }
 }
-
