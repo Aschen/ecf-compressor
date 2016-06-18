@@ -35,15 +35,22 @@ void EpsiFileCompressor::compress(const QString &folder, const QString &ecfFilen
 
 void EpsiFileCompressor::uncompress(const QString &ecfFilename, const QString &destFolder)
 {
+<<<<<<< HEAD
+=======
+    QDir                currentDir(".");
+>>>>>>> c7d134c2cbaacaaa9bdfbaa67eafac1120fdf9c2
     QFile               ecfFile(ecfFilename);
     QByteArray          compressedData;
     QWaitCondition      waitCondition;
     ZippedBufferPool    zippedBufferPool(&waitCondition);
+<<<<<<< HEAD
     Unzipper            unzipper1(destFolder, &zippedBufferPool, &waitCondition);
     Unzipper            unzipper2(destFolder, &zippedBufferPool, &waitCondition);
 
     unzipper1.start();
     unzipper2.start();
+=======
+>>>>>>> c7d134c2cbaacaaa9bdfbaa67eafac1120fdf9c2
 
     ecfFile.open(QIODevice::ReadOnly);
     compressedData = ecfFile.readAll();
@@ -56,10 +63,12 @@ void EpsiFileCompressor::uncompress(const QString &ecfFilename, const QString &d
         stream >> zippedBuffer;
         zippedBufferPool.put(zippedBuffer);
     }
+<<<<<<< HEAD
 
     zippedBufferPool.done(true);
 
     unzipper1.wait();
     unzipper2.wait();
+=======
+>>>>>>> c7d134c2cbaacaaa9bdfbaa67eafac1120fdf9c2
 }
-

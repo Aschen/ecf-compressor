@@ -16,7 +16,7 @@ Then you can verify files integrity :
 ## Run tests
 
  - ```cd test```
- - ```make```
+ - ```qmake && make```
  - ```./test```
 
 (Sometime the test is blocked and I have to sigkill the program and restart it..)
