@@ -9,11 +9,11 @@ int main(int argc, char *argv[])
 
     EpsiFileCompressor  fileCompressor;
 
-    fileCompressor.compress(".", "compressed.ecf");
+    fileCompressor.compress(".", "/tmp/ecf/compressed.ecf");
 
     qDebug() << "Compress files done.";
 
-    fileCompressor.uncompress("compressed.ecf", "tmp_dest/");
+    fileCompressor.uncompress("/tmp/ecf/compressed.ecf", "/tmp/ecf/data/");
 
     qDebug() << "Uncompress files done.";
 

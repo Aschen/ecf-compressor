@@ -17,11 +17,11 @@ Unzipper::Unzipper(const QString &destFolder, ZippedBufferPool* zippedBufferPool
 
 void Unzipper::run()
 {
-    m_waitCondition->wait(&m_mutex);
+//    m_waitCondition->wait(&m_mutex);
 
     ZippedBuffer    zippedBuffer = m_zippedBufferPool->tryGet();
 
-    while ( ! m_zippedBufferPool->done())
+    while (m_zippedBufferPool->count () != 0)
     {
         if (zippedBuffer.valid())
         {
@@ -31,7 +31,8 @@ void Unzipper::run()
         zippedBuffer = m_zippedBufferPool->tryGet();
     }
 
-    m_mutex.unlock();
+//    m_mutex.unlock();
+    qDebug() << "QUIT";
 }
 
 void Unzipper::unzip(const ZippedBuffer &zippedBuffer)
@@ -43,6 +44,7 @@ void Unzipper::unzip(const ZippedBuffer &zippedBuffer)
         QDir().mkpath(fileinfo.path());
 
     QFile           file(fileinfo.filePath());
+    qDebug() << "Unzip " << fileinfo.filePath();
 
     file.open(QIODevice::WriteOnly);
     file.write(qUncompress(zippedBuffer.data()));
