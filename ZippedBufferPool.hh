@@ -14,7 +14,6 @@ private:
     QQueue<ZippedBuffer>        m_zippedBuffers;
     QMutex                      m_mutex;
     QWaitCondition*             m_waitCondition;
-    bool                        m_started;
     bool                        m_done;
 
 public:

@@ -5,6 +5,7 @@
 #include "ZippedBuffer.hh"
 #include "ZippedBufferPool.hh"
 #include "Writter.hh"
+#include "Unzipper.hh"
 
 EpsiFileCompressor::EpsiFileCompressor()
 {
@@ -34,9 +35,15 @@ void EpsiFileCompressor::compress(const QString &folder, const QString &ecfFilen
 
 void EpsiFileCompressor::uncompress(const QString &ecfFilename, const QString &destFolder)
 {
-    QDir        currentDir(".");
-    QFile       ecfFile(ecfFilename);
-    QByteArray  compressedData;
+    QFile               ecfFile(ecfFilename);
+    QByteArray          compressedData;
+    QWaitCondition      waitCondition;
+    ZippedBufferPool    zippedBufferPool(&waitCondition);
+    Unzipper            unzipper1(destFolder, &zippedBufferPool, &waitCondition);
+    Unzipper            unzipper2(destFolder, &zippedBufferPool, &waitCondition);
+
+    unzipper1.start();
+    unzipper2.start();
 
     ecfFile.open(QIODevice::ReadOnly);
     compressedData = ecfFile.readAll();
@@ -47,18 +54,12 @@ void EpsiFileCompressor::uncompress(const QString &ecfFilename, const QString &d
     {
         ZippedBuffer    zippedBuffer;
         stream >> zippedBuffer;
-
-        QFileInfo       fileinfo(destFolder + currentDir.relativeFilePath(zippedBuffer.filepath()));
-
-        if ( ! QDir(fileinfo.path()).exists())
-            QDir().mkpath(fileinfo.path());
-
-        QFile           file(fileinfo.filePath());
-        file.open(QIODevice::WriteOnly);
-
-        file.write(qUncompress(zippedBuffer.data()));
-
-        file.close();
+        zippedBufferPool.put(zippedBuffer);
     }
+
+    zippedBufferPool.done(true);
+
+    unzipper1.wait();
+    unzipper2.wait();
 }
 

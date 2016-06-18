@@ -3,8 +3,7 @@
 #include "ZippedBuffer.hh"
 
 ZippedBufferPool::ZippedBufferPool(QWaitCondition *waitCondition)
-    : m_waitCondition(waitCondition),
-      m_started(false)
+    : m_waitCondition(waitCondition)
 {
 }
 
@@ -14,11 +13,7 @@ void ZippedBufferPool::put(const ZippedBuffer &zippedBuffer)
 
     m_zippedBuffers.push_back(zippedBuffer);
 
-    if (m_waitCondition && ! m_started)
-    {
-        m_waitCondition->wakeOne();
-        m_started = true;
-    }
+    m_waitCondition->wakeAll();
 }
 
 ZippedBuffer ZippedBufferPool::tryGet()
